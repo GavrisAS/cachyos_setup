@@ -3,6 +3,8 @@
   gather_facts: true
 
   vars:
+    ansible_stdout_callback: yaml
+    
     # Пакеты из официальных репозиториев Arch/CachyOS
     pacman_packages:
       - nvidia-dkms
