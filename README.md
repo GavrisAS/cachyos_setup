@@ -1,18 +1,25 @@
 # ansible
 Ansible playbooks
 
-1. Установить Ansible и Git на свежую систему CachyOS:
+0. Разрешаем sudo только для pacman и yay
+
+    в файле
+   sudo visudo
+   добавляем строку
+   ammo ALL=(ALL) NOPASSWD: /usr/bin/pacman, /usr/bin/yay
+   
+2. Установить Ansible и Git на свежую систему CachyOS:
 
     sudo pacman -Syu ansible git --noconfirm
    
-2. Установить коллекцию Ansible для работы с AUR:
+3. Установить коллекцию Ansible для работы с AUR:
 
     ansible-galaxy collection install kewlfft.aur
 
-3. Выполнить вручную обновление ключей перез запуском playbook
+4. Выполнить вручную обновление ключей перез запуском playbook
 
     pacman -Sy cachyos-keyring
 
 5. Выполнить
 
-    ansible-playbook setup_cachyos_<вставить нужное>.yml -K
+    ansible-playbook setup_cachyos_< нужный файл >.yml --ask-become-pass
