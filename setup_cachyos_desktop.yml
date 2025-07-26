@@ -1,27 +1,27 @@
 - hosts: localhost
   connection: local
-  become: yes # Большинство задач требуют прав суперпользователя (sudo)
+  gather_facts: false
 
   vars:
     # Пакеты из официальных репозиториев Arch/CachyOS
     pacman_packages:
-      - nvidia-dkms       # Последние драйверы NVIDIA (DKMS версия лучше для кастомных ядер)
-      - docker            # Система контейнеризации
+      - nvidia-dkms
+      - docker
       - telegram-desktop
       - discord
-      - code              # Visual Studio Code
+      - code
       - flameshot
       - gramps
-      - libreoffice-fresh # Свежая версия LibreOffice
+      - libreoffice-fresh
       - qbittorrent
       - texmaker
       - thunderbird
       - firefox
       - virtualbox
-      - virtualbox-host-dkms # Модули ядра для VirtualBox
+      - virtualbox-host-dkms
       - vlc
 
-    # Пакеты из репозитория AUR (Arch User Repository)
+    # Пакеты из AUR
     aur_packages:
       - jetbrains-toolbox
       - lazydocker
@@ -34,32 +34,37 @@
       - cursor-appimage-bin
 
   pre_tasks:
-    - name: 🔑 Шаг 0. Принудительное обновление пакета с ключами CachyOS
+    - name: 🔑 Шаг 0. Принудительное обновление ключей CachyOS
+      become: true
       pacman:
         name: cachyos-keyring
-        state: latest # Убедиться, что установлена последняя версия
-    
+        state: latest
+
     - name: 🔑 Шаг 0.1. Обновление базы данных пакетов
+      become: true
       pacman:
         update_cache: yes
 
   tasks:
     - name: 1. Обновление всех пакетов системы
+      become: true
       pacman:
         upgrade: yes
 
     - name: 2. Установка 'base-devel' для сборки AUR пакетов
+      become: true
       pacman:
         name: base-devel
         state: present
 
-    - name: 3. Установка yay (популярный AUR хелпер)
+    - name: 3. Установка yay (AUR-хелпер)
       kewlfft.aur.aur:
         name: yay
         state: present
-      become_user: "{{ ansible_user_id }}" # Сборка пакетов AUR должна производиться от имени обычного пользователя
+      become: false
 
     - name: 4. Установка пакетов из официальных репозиториев
+      become: true
       pacman:
         name: "{{ pacman_packages }}"
         state: present
@@ -70,33 +75,31 @@
         name: "{{ aur_packages }}"
         state: present
       become: false
-      become_user: "{{ ansible_env.SUDO_USER | default(ansible_user_id) }}"
-      environment:
-        SUDO_ASKPASS: /usr/bin/false
 
     - name: 6. Настройка Docker
+      become: true
       block:
-        - name: Добавление текущего пользователя в группу docker
+        - name: Добавление пользователя в группу docker
           user:
             name: "{{ ansible_user_id }}"
             groups: docker
             append: yes
 
-        - name: Включение и запуск сервиса Docker
+        - name: Включение и запуск Docker
           systemd:
             name: docker
             enabled: yes
             state: started
-      
-    - name: 7. Завершение и информационное сообщение
+
+    - name: 7. Информационное сообщение
       debug:
         msg: |
           ========================================================================
-          Установка завершена!
+          ✅ Установка завершена!
           
-          ВАЖНО: Чтобы изменения для Docker и драйверов NVIDIA/VirtualBox
-          полностью вступили в силу, рекомендуется ПЕРЕЗАГРУЗИТЬ компьютер.
-          
-          Для использования VirtualBox может потребоваться запустить:
-          'sudo modprobe vboxdrv' или просто перезагрузиться.
+          ℹ️ ВАЖНО: Чтобы изменения для Docker, NVIDIA и VirtualBox вступили в силу,
+          рекомендуется перезагрузить компьютер.
+
+          Для VirtualBox может понадобиться:
+          sudo modprobe vboxdrv
           ========================================================================
