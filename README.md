@@ -4,9 +4,15 @@ Ansible playbooks
 0. Разрешаем sudo только для pacman и yay
 
     в файле
+   ```
+   export EDITOR=nano
    sudo visudo
+   ```
+   
    добавляем строку
-   ammo ALL=(ALL) NOPASSWD: /usr/bin/pacman, /usr/bin/yay
+   ```
+   <имя_пользователя> ALL=(ALL) NOPASSWD: /usr/bin/pacman, /usr/bin/yay
+   ```
    
 2. Установить Ansible и Git на свежую систему CachyOS:
 
