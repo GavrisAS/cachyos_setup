@@ -23,7 +23,7 @@ Ansible playbooks
 
 6. Выполнить вручную обновление ключей перез запуском playbook
    ```
-   pacman -Sy cachyos-keyring
+   sudo pacman -Sy cachyos-keyring
    ```
 
 7. Выполнить
