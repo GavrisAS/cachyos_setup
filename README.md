@@ -9,6 +9,9 @@ Ansible playbooks
 
     ansible-galaxy collection install kewlfft.aur
 
-3. Выполнить
+3. Выполнить вручную обновление ключей перез запуском playbook
+       pacman -Sy cachyos-keyring
+
+5. Выполнить
 
     ansible-playbook setup_cachyos_<вставить нужное>.yml -K
