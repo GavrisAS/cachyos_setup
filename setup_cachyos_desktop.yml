@@ -30,7 +30,7 @@
       - obsidian
       - yandex-browser
       - warp-terminal
-      - nekoray
+      - throne-bin
       - cursor-appimage-bin
 
   pre_tasks:
