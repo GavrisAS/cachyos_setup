@@ -1,0 +1,94 @@
+- hosts: localhost
+  connection: local
+  become: yes # Большинство задач требуют прав суперпользователя (sudo)
+
+  vars:
+    # Пакеты из официальных репозиториев Arch/CachyOS
+    pacman_packages:
+      - nvidia-dkms       # Последние драйверы NVIDIA (DKMS версия лучше для кастомных ядер)
+      - docker            # Система контейнеризации
+      - telegram-desktop
+      - discord
+      - code              # Visual Studio Code
+      - flameshot
+      - gramps
+      - libreoffice-fresh # Свежая версия LibreOffice
+      - qbittorrent
+      - texmaker
+      - thunderbird
+      - firefox
+      - virtualbox
+      - virtualbox-host-dkms # Модули ядра для VirtualBox
+      - vlc
+
+    # Пакеты из репозитория AUR (Arch User Repository)
+    aur_packages:
+      - pycharm-professional
+      - rustrover
+      - lazydocker
+      - zed-editor
+      - lmstudio-bin
+      - obsidian
+      - yandex-browser
+      - warp-terminal
+      - nekoray
+      - cursor-appimage-bin
+
+  tasks:
+    - name: 1. Обновление всех пакетов системы
+      pacman:
+        update_cache: yes
+        upgrade: yes
+
+    - name: 2. Установка 'base-devel' для сборки AUR пакетов
+      pacman:
+        name: base-devel
+        state: present
+        # Убедимся, что все члены группы base-devel установлены
+        # и не запрашивают подтверждение в интерактивном режиме
+        update_cache: yes 
+
+    - name: 3. Установка yay (популярный AUR хелпер)
+      kewlfft.aur.aur:
+        name: yay
+        state: present
+      become_user: "{{ ansible_user_id }}" # Сборка пакетов AUR должна производиться от имени обычного пользователя
+
+    - name: 4. Установка пакетов из официальных репозиториев
+      pacman:
+        name: "{{ pacman_packages }}"
+        state: present
+
+    - name: 5. Установка пакетов из AUR с помощью yay
+      kewlfft.aur.aur:
+        use: yay
+        name: "{{ aur_packages }}"
+        state: present
+      become_user: "{{ ansible_user_id }}" # Важно!
+
+    - name: 6. Настройка Docker
+      block:
+        - name: Добавление текущего пользователя в группу docker
+          user:
+            name: "{{ ansible_user_id }}"
+            groups: docker
+            append: yes
+
+        - name: Включение и запуск сервиса Docker
+          systemd:
+            name: docker
+            enabled: yes
+            state: started
+      
+    - name: 7. Завершение и информационное сообщение
+      debug:
+        msg: |
+          ========================================================================
+          Установка завершена!
+          
+          ВАЖНО: Чтобы изменения для Docker и драйверов NVIDIA/VirtualBox
+          полностью вступили в силу, рекомендуется ПЕРЕЗАГРУЗИТЬ компьютер.
+          
+          Для использования VirtualBox может потребоваться запустить:
+          'sudo modprobe vboxdrv' или просто перезагрузиться.
+          ========================================================================
