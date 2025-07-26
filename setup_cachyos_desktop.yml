@@ -27,6 +27,7 @@
       - otf-font-awesome
       - ttf-jetbrains-mono
       - github-cli
+      - zed
 
     # Пакеты из AUR
     aur_packages:
@@ -123,15 +124,6 @@
       args:
         executable: /bin/bash
         creates: "{{ ansible_env.HOME }}/.juliaup/bin/julia"
-
-    - name: 🔑 10. Установка Zed
-      become: false
-      become_user: "{{ ansible_env.SUDO_USER | default(ansible_user_id | default('ammo')) }}"
-      shell: |
-        curl -f https://zed.dev/install.sh | sh
-      args:
-        executable: /bin/bash
-        creates: "{{ ansible_env.HOME }}/.local/bin/zed"
 
     - name: Информационное сообщение
       debug:
