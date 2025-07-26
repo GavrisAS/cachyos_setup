@@ -23,8 +23,7 @@
 
     # Пакеты из репозитория AUR (Arch User Repository)
     aur_packages:
-      - pycharm-professional
-      - rustrover
+      - jetbrains-toolbox
       - lazydocker
       - zed-editor
       - lmstudio-bin
@@ -70,7 +69,8 @@
         use: yay
         name: "{{ aur_packages }}"
         state: present
-      become_user: "{{ ansible_user_id }}" # Важно!
+      become: false
+      become_user: "{{ ansible_env.SUDO_USER | default(ansible_user_id) }}"
 
     - name: 6. Настройка Docker
       block:
