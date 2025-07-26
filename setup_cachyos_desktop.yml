@@ -31,7 +31,7 @@
 
     # Пакеты из AUR
     aur_packages:
-      - jetbrains-toolbox
+      #- jetbrains-toolbox  # раскомментировать при использовании МЗТ
       - lazydocker
       - lmstudio
       - obsidian
