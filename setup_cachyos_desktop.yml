@@ -7,7 +7,7 @@
     pacman_packages:
       - nvidia-dkms
       - docker
-      - docker-compose-plugin
+      - docker-compose
       - telegram-desktop
       - discord
       - flameshot
