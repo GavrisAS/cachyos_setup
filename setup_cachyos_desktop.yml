@@ -7,9 +7,9 @@
     pacman_packages:
       - nvidia-dkms
       - docker
+      - docker-compose-plugin
       - telegram-desktop
       - discord
-      - code
       - flameshot
       - gramps
       - libreoffice-fresh
@@ -20,63 +20,71 @@
       - virtualbox
       - virtualbox-host-dkms
       - vlc
+      - zed
+      - ruff
+      - neovim
+      - yt-dlp
+      - ttf-font-awesome
+      - otf-font-awesome
+      - ttf-jetbrains-mono
 
     # Пакеты из AUR
     aur_packages:
       - jetbrains-toolbox
       - lazydocker
-      - zed-editor
-      - lmstudio-bin
+      - lmstudio
       - obsidian
       - yandex-browser
       - warp-terminal
       - throne-bin
-      - cursor-appimage-bin
+      - cursor-bin
+      - slack-desktop
+      - visual-studio-code-bin
 
   pre_tasks:
-    - name: 🔑 Шаг 0. Принудительное обновление ключей CachyOS
+    - name: 🔑 0. Принудительное обновление ключей CachyOS
       become: true
       pacman:
         name: cachyos-keyring
         state: latest
 
-    - name: 🔑 Шаг 0.1. Обновление базы данных пакетов
+    - name: 🔑 0.1. Обновление базы данных пакетов
       become: true
       pacman:
         update_cache: yes
 
   tasks:
-    - name: 1. Обновление всех пакетов системы
+    - name: 🔑 1. Обновление всех пакетов системы
       become: true
       pacman:
         upgrade: yes
 
-    - name: 2. Установка 'base-devel' для сборки AUR пакетов
+    - name: 🔑 2. Установка 'base-devel' для сборки AUR пакетов
       become: true
       pacman:
         name: base-devel
         state: present
 
-    - name: 3. Установка yay (AUR-хелпер)
+    - name: 🔑 3. Установка yay (AUR-хелпер)
       kewlfft.aur.aur:
         name: yay
         state: present
       become: false
 
-    - name: 4. Установка пакетов из официальных репозиториев
+    - name: 🔑 4. Установка пакетов из официальных репозиториев
       become: true
       pacman:
         name: "{{ pacman_packages }}"
         state: present
 
-    - name: 5. Установка пакетов из AUR с помощью yay
+    - name: 🔑 5. Установка пакетов из AUR с помощью yay
       kewlfft.aur.aur:
         use: yay
         name: "{{ aur_packages }}"
         state: present
       become: false
 
-    - name: 6. Настройка Docker
+    - name: 🔑 6. Настройка Docker
       become: true
       block:
         - name: Добавление пользователя в группу docker
@@ -91,7 +99,32 @@
             enabled: yes
             state: started
 
-    - name: 7. Информационное сообщение
+    - name: 🔑 7. Установка Rust
+      become: false
+      become_user: "{{ ansible_env.SUDO_USER | default(ansible_user_id | default('ammo')) }}"
+      shell: |
+        curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+      args:
+        creates: "{{ ansible_env.HOME }}/.cargo/bin/rustc"
+
+    - name: 🔑 8. Установка uv
+      become: false
+      become_user: "{{ ansible_env.SUDO_USER | default(ansible_user_id | default('ammo')) }}"
+      shell: |
+        curl -LsSf https://astral.sh/uv/install.sh | sh
+      args:
+        creates: "{{ ansible_env.HOME }}/.local/bin/uv"
+
+    - name: 🔑 9. Установка Julia
+      become: false
+      become_user: "{{ ansible_env.SUDO_USER | default(ansible_user_id | default('ammo')) }}"
+      shell: |
+        curl -fsSL https://install.julialang.org | sh -s -- --yes
+      args:
+        executable: /bin/bash
+        creates: "{{ ansible_env.HOME }}/.juliaup/bin/julia"
+
+    - name: Информационное сообщение
       debug:
         msg: |
           ========================================================================
