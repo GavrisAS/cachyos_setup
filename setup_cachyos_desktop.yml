@@ -71,6 +71,8 @@
         state: present
       become: false
       become_user: "{{ ansible_env.SUDO_USER | default(ansible_user_id) }}"
+      environment:
+        SUDO_ASKPASS: /usr/bin/false
 
     - name: 6. Настройка Docker
       block:
