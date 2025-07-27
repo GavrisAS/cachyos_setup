@@ -117,7 +117,7 @@
       args:
         creates: "{{ ansible_env.HOME }}/.local/bin/uv"
 
-    - name: 🔑 9. Установка Julia
+    - name: 🔑 9. Установка Julia # если не использовать МЗТ, то есть проблемы при установки
       become: false
       become_user: "{{ ansible_env.SUDO_USER | default(ansible_user_id | default('ammo')) }}"
       shell: |
