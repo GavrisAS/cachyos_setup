@@ -1,14 +1,9 @@
 # ansible
 Ansible playbooks
 
-1. Разрешаем sudo только для pacman и yay
+1. Разрешаем sudo только для pacman и yay (заменить имя пользователя на реальное)
    ```
-   export EDITOR=nano
-   sudo visudo
-   ```
-   добавляем строку
-   ```
-   <имя_пользователя> ALL=(ALL) NOPASSWD: /usr/bin/pacman, /usr/bin/yay
+   echo '<имя_пользователя> ALL=(ALL) NOPASSWD: /usr/bin/pacman, /usr/bin/yay' | sudo tee -a /etc/sudoers.d/nopasswd-pacman
    ```
    
 2. Предварительные настройки (Ansible, git, AUR, keyring)
@@ -18,7 +13,7 @@ Ansible playbooks
    sudo pacman -Sy cachyos-keyring
    ```
 
-3. Выполнить
+3. Клонируем репозиторий и выполняем
    ```
-   ansible-playbook setup_cachyos_< нужный файл >.yml --ask-become-pass
+   ansible-playbook setup_cachyos_<нужный файл>.yml --ask-become-pass
    ```
