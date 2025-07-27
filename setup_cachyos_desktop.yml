@@ -29,6 +29,7 @@
       - github-cli
       - zed
       - ghostty
+      - btop
 
     # Пакеты из AUR
     aur_packages:
@@ -43,6 +44,7 @@
       - visual-studio-code-bin
       - zoom
       - yandex-music
+      - peazip
 
   pre_tasks:
     - name: 🔑 0. Принудительное обновление ключей CachyOS
