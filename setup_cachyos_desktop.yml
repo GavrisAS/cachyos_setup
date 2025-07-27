@@ -32,7 +32,6 @@
 
     # Пакеты из AUR
     aur_packages:
-      #- jetbrains-toolbox  # раскомментировать при использовании МЗТ
       - lazydocker
       - lmstudio
       - obsidian
@@ -117,15 +116,6 @@
         curl -LsSf https://astral.sh/uv/install.sh | sh
       args:
         creates: "{{ ansible_env.HOME }}/.local/bin/uv"
-
-    - name: 🔑 9. Установка Julia # если не использовать МЗТ, то есть проблемы при установки
-      become: false
-      become_user: "{{ ansible_env.SUDO_USER | default(ansible_user_id | default('ammo')) }}"
-      shell: |
-        curl -fsSL https://install.julialang.org | sh -s -- --yes
-      #args:
-      #  executable: /bin/bash
-      #  creates: "{{ ansible_env.HOME }}/.juliaup/bin/julia"
 
     - name: Информационное сообщение
       debug:
