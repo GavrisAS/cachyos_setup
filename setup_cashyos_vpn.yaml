@@ -1,0 +1,32 @@
+- hosts: localhost
+  connection: local
+  gather_facts: true
+
+  vars:
+    # Пакеты из AUR
+    aur_packages:
+      - jetbrains-toolbox
+
+  tasks:
+    - name: 🔑 1. Установка пакетов из AUR с помощью yay
+      kewlfft.aur.aur:
+        use: yay
+        name: "{{ aur_packages }}"
+        state: present
+      become: false
+
+    - name: 🔑 2. Установка Julia
+      become: false
+      become_user: "{{ ansible_env.SUDO_USER | default(ansible_user_id | default('ammo')) }}"
+      shell: |
+        curl -fsSL https://install.julialang.org | sh -s -- --yes
+      #args:
+      #  executable: /bin/bash
+      #  creates: "{{ ansible_env.HOME }}/.juliaup/bin/julia"
+
+    - name: Информационное сообщение
+      debug:
+        msg: |
+          ========================================================================
+          ✅ Установка завершена!
+          ========================================================================
