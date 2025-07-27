@@ -28,6 +28,7 @@
       - ttf-jetbrains-mono
       - github-cli
       - zed
+      - ghostty
 
     # Пакеты из AUR
     aur_packages:
