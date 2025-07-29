@@ -1,5 +1,5 @@
-# ansible
-Ansible playbooks
+# Ansible Playbooks 
+Настройка рабочей системы после установки
 
 1. Разрешаем sudo только для pacman и yay (заменить имя пользователя на реальное)
    ```
@@ -15,5 +15,5 @@ Ansible playbooks
 
 3. Клонируем репозиторий и выполняем
    ```
-   ansible-playbook setup_cachyos_<нужный файл>.yml --ask-become-pass
+   ansible-playbook setup_cachyos_desktop.yml --ask-become-pass
    ```
