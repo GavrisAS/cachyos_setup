@@ -47,49 +47,49 @@
       - peazip
 
   pre_tasks:
-    - name: 🔑 0. Принудительное обновление ключей CachyOS
+    - name: 👉 0. Принудительное обновление ключей CachyOS
       become: true
       pacman:
         name: cachyos-keyring
         state: latest
 
-    - name: 🔑 0.1. Обновление базы данных пакетов
+    - name: 👉 0.1. Обновление базы данных пакетов
       become: true
       pacman:
         update_cache: yes
 
   tasks:
-    - name: 🔑 1. Обновление всех пакетов системы
+    - name: 👉 1. Обновление всех пакетов системы
       become: true
       pacman:
         upgrade: yes
 
-    - name: 🔑 2. Установка 'base-devel' для сборки AUR пакетов
+    - name: 👉 2. Установка 'base-devel' для сборки AUR пакетов
       become: true
       pacman:
         name: base-devel
         state: present
 
-    - name: 🔑 3. Установка yay (AUR-хелпер)
+    - name: 👉 3. Установка yay (AUR-хелпер)
       kewlfft.aur.aur:
         name: yay
         state: present
       become: false
 
-    - name: 🔑 4. Установка пакетов из официальных репозиториев
+    - name: 👉 4. Установка пакетов из официальных репозиториев
       become: true
       pacman:
         name: "{{ pacman_packages }}"
         state: present
 
-    - name: 🔑 5. Установка пакетов из AUR с помощью yay
+    - name: 👉 5. Установка пакетов из AUR с помощью yay
       kewlfft.aur.aur:
         use: yay
         name: "{{ aur_packages }}"
         state: present
       become: false
 
-    - name: 🔑 6. Настройка Docker
+    - name: 👉 6. Настройка Docker
       become: true
       block:
         - name: Добавление пользователя в группу docker
@@ -104,7 +104,7 @@
             enabled: yes
             state: started
 
-    - name: 🔑 7. Установка Rust
+    - name: 👉 7. Установка Rust
       become: false
       become_user: "{{ ansible_env.SUDO_USER | default(ansible_user_id | default('ammo')) }}"
       shell: |
@@ -112,7 +112,7 @@
       args:
         creates: "{{ ansible_env.HOME }}/.cargo/bin/rustc"
 
-    - name: 🔑 8. Установка uv
+    - name: 👉 8. Установка uv
       become: false
       become_user: "{{ ansible_env.SUDO_USER | default(ansible_user_id | default('ammo')) }}"
       shell: |
