@@ -95,7 +95,7 @@
         name: "{{ pacman_packages }}"
         state: present
 
-    - name: 👉 5. Установка пакетов из AUR с помощью yay
+    - name: 👉 5. Установка пакетов из AUR
       kewlfft.aur.aur:
         use: yay
         name: "{{ aur_packages }}"
