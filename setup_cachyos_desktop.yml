@@ -23,8 +23,8 @@
       - ruff
       - neovim
       - yt-dlp
-      - ttf-font-awesome
-      - otf-font-awesome
+      #- ttf-font-awesome
+      #- otf-font-awesome
       - ttf-jetbrains-mono
       - github-cli
       - zed
