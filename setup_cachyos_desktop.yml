@@ -30,6 +30,15 @@
       - zed
       - ghostty
       - btop
+      - eza
+      - fd
+      - yazi
+      - ffmpeg
+      - jq
+      - ripgrep
+      - fzf
+      - zoxide
+      - nerd-fonts
 
     # Пакеты из AUR
     aur_packages:
