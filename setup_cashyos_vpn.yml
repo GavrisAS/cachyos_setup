@@ -27,8 +27,7 @@
     - name: 🔑 3. Обновление автодополнений fish
       become: false
       become_user: "{{ ansible_env.SUDO_USER | default(ansible_user_id | default('ammo')) }}"
-      shell: |
-        fish_update_completions
+      shell: fish -c 'fish_update_completions'
 
     - name: Информационное сообщение
       debug:
