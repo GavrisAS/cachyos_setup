@@ -133,7 +133,15 @@
       args:
         creates: "{{ ansible_env.HOME }}/.local/bin/uv"
 
-    - name: 👉 9. Обновление автодополнений fish
+    - name: 👉 9. Добавить алиасы в fish
+      blockinfile:
+        path: "{{ ansible_env.HOME }}/.config/fish/config.fish"
+        marker: '#### ALIASES'
+        block: |
+          alias gs 'git status'
+          alias ll 'ls -lah'
+
+    - name: 👉 10. Обновление автодополнений для fish
       become: false
       become_user: "{{ ansible_env.SUDO_USER | default(ansible_user_id | default('ammo')) }}"
       shell: fish -c 'fish_update_completions'
