@@ -8,7 +8,7 @@
       - jetbrains-toolbox
 
   tasks:
-    - name: 🔑 1. Установка пакетов из AUR с помощью yay
+    - name: 🔑 1. Установка пакетов из AUR
       kewlfft.aur.aur:
         use: yay
         name: "{{ aur_packages }}"
