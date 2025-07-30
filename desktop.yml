@@ -146,6 +146,7 @@
           alias lls 'eza -lhagoUm --icons --hyperlink --time-style iso --colour-scale=age --smart-group --total-size'
           alias as-tree 'tree --fromfile' # показать дерево, пример: fd -e rs | as-tree
           alias fda 'fd -u' # поиск включает скрытые и игнорируемые
+          alias smi 'watch -n 1 -d nvidia-smi'
 
     - name: 👉 10. Обновление автодополнений для fish
       become: false
