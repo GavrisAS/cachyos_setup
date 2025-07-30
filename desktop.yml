@@ -139,7 +139,8 @@
         marker: '#### ALIASES'
         block: |
           alias gs 'git status'
-          alias ll 'ls -lah'
+          alias ls 'eza --long'
+          alias ll 'eza --long --all --group'
 
     - name: 👉 10. Обновление автодополнений для fish
       become: false
