@@ -44,6 +44,7 @@
       - dust
       - lazygit
       - graphviz
+      - tree
 
     # Пакеты из AUR
     aur_packages:
