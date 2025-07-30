@@ -17,3 +17,5 @@
    ```
    ansible-playbook setup_cachyos_desktop.yml --ask-become-pass
    ```
+curl -sL https://raw.githubusercontent.com/GavrisAS/ansible/main/setup.fish \
+        | fish - desktop.yml
