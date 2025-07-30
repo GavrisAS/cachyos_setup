@@ -3,7 +3,6 @@
 
 Desktop
    ```
-   set -x PLAYBOOK desktop.yml; \
-      curl -sL https://raw.githubusercontent.com/GavrisAS/ansible/main/setup.fish \
-        | fish
+   set -x PLAYBOOK desktop.yml
+   curl -sL https://raw.githubusercontent.com/GavrisAS/ansible/main/setup.fish | fish
    ```
