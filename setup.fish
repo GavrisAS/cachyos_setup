@@ -39,7 +39,6 @@ ansible-galaxy collection install kewlfft.aur
 echo "Запускаем ansible-pull из $GIT_REPO, плейбук: $PLAYBOOK ..."
 ansible-pull \
     -U $GIT_REPO \
-    -i localhost,(hostname), \
     $PLAYBOOK \
     --ask-become-pass
 
