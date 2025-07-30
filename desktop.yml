@@ -139,8 +139,13 @@
         marker: '#### ALIASES'
         block: |
           alias gs 'git status'
-          alias ls 'eza --long'
-          alias ll 'eza --long --all --group'
+          alias ls 'eza -lhoUm --icons --hyperlink --time-style iso --colour-scale=age --no-permissions'
+          alias lsg 'eza -lhoUm --icons --hyperlink --time-style iso --colour-scale=age --no-permissions --git --git-repos'
+          alias ll 'eza -lhagoUm --icons --hyperlink --time-style iso --colour-scale=age --smart-group'
+          alias llg 'eza -lhagoUm --icons --hyperlink --time-style iso --colour-scale=age --smart-group --git --git-repos'
+          alias lls 'eza -lhagoUm --icons --hyperlink --time-style iso --colour-scale=age --smart-group --total-size'
+          alias as-tree 'tree --fromfile' # показать дерево, пример: fd -e rs | as-tree
+          alias fda 'fd -u' # поиск включает скрытые и игнорируемые
 
     - name: 👉 10. Обновление автодополнений для fish
       become: false
