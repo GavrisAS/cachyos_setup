@@ -2,14 +2,11 @@
 # bootstrap.fish — подготовка системы + ansible-pull
 # Использование: ./bootstrap.fish <playbook.yml>
 
-# Проверяем аргументы
-if test (count $argv) -ne 1
-    echo "Использование: $argv[0] <playbook.yml>"
+# Проверяем задан ли плейбук
+if not set -q PLAYBOOK
+    echo "❌ Не задана переменная PLAYBOOK"
     exit 1
 end
-
-# Берём имя плейбука из первого аргумента
-set PLAYBOOK $argv[1]
 
 # Настройки репозитория
 set GIT_REPO "https://github.com/GavrisAS/ansible.git"
@@ -27,7 +24,7 @@ if not test -f $SUDOERS_PATH
         | sudo tee $SUDOERS_PATH > /dev/null
     sudo chmod 440 $SUDOERS_PATH
 else
-    echo "✔ Судоеры для pacman уже настроены."
+    echo "✅ Судоеры для pacman уже настроены."
 end
 
 # 2) Устанавливаем Ansible, Git и keyring CachyOS
