@@ -139,7 +139,6 @@
         path: "{{ ansible_env.HOME }}/.config/fish/config.fish"
         marker: '#### ALIASES'
         block: |
-          alias gs 'git status'
           alias ls 'eza -lhoUm --icons --hyperlink --time-style iso --colour-scale=age --no-permissions'
           alias lsg 'eza -lhoUm --icons --hyperlink --time-style iso --colour-scale=age --no-permissions --git --git-repos'
           alias ll 'eza -lhagoUm --icons --hyperlink --time-style iso --colour-scale=age --smart-group'
