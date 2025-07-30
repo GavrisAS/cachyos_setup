@@ -146,6 +146,11 @@
       become_user: "{{ ansible_env.SUDO_USER | default(ansible_user_id | default('ammo')) }}"
       shell: fish -c 'fish_update_completions'
 
+    - name: 👉 11. Дополнительные настройки
+      become: false
+      become_user: "{{ ansible_env.SUDO_USER | default(ansible_user_id | default('ammo')) }}"
+      shell: fish -c 'tldr --update'
+
     - name: Информационное сообщение
       debug:
         msg: |
