@@ -149,6 +149,12 @@
           alias smi 'watch -n 1 -d nvidia-smi'
           alias fzf 'fzf --height 50% --layout reverse --info inline --border'
           alias fzfp "fzf --height 50% --layout reverse --info inline --border --preview 'batcat --color=always {}' --preview-window '~3'"
+          alias ps 'procs --watch'
+          alias pst 'procs --tree'
+          alias psc 'procs --watch --sortd cpu'
+          alias psm 'procs --watch --sortd mem'
+          alias lzg 'lazygit'
+          alias lzd 'lazydocker'
 
     - name: 👉 10. Добавление интеграций в fish
       blockinfile:
@@ -157,6 +163,9 @@
         block: |
           fzf --fish | source
           zoxide init fish | source
+          source <(procs --gen-completion-out fish)
+          abbr -a --position anywhere -- --help '--help | bat -plhelp'
+          abbr -a --position anywhere -- -h '-h | bat -plhelp'
 
     - name: 👉 11. Обновление автодополнений для fish
       become: false
