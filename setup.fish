@@ -15,7 +15,7 @@ set GIT_REPO "https://github.com/GavrisAS/cachyos_setup.git"
 set USER (whoami)
 
 # Аргументы для ansible-pull
-set PULL_ARGS --limit localhost
+set PULL_ARGS --limit localhost --ask-become-pass
 
 # если задана переменная EXTRA_ARGS — дополняем аргументы
 if set -q EXTRA_ARGS
@@ -47,8 +47,7 @@ ansible-galaxy collection install kewlfft.aur
 echo "Запускаем ansible-pull из $GIT_REPO, плейбук: $PLAYBOOK ..."
 ansible-pull \
     -U $GIT_REPO \
-    $PLAYBOOK \
     $PULL_ARGS \
-    --ask-become-pass
+    $PLAYBOOK
 
 echo "✅ Готово! Система настроена."
