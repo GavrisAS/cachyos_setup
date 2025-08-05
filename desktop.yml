@@ -23,8 +23,6 @@
       - ruff
       - neovim
       - yt-dlp
-      #- ttf-font-awesome
-      #- otf-font-awesome
       - ttf-jetbrains-mono
       - github-cli
       - zed
@@ -128,7 +126,7 @@
 
     - name: 👉 8. Установка uv
       become: false
-      become_user: "{{ ansible_env.SUDO_USER | default(ansible_user_id | default('ammo')) }}"
+      become_user: "{{ ansible_env.SUDO_USER | default(ansible_user_id) }}"
       shell: |
         curl -LsSf https://astral.sh/uv/install.sh | sh
       args:
@@ -169,13 +167,24 @@
 
     - name: 👉 11. Обновление автодополнений для fish
       become: false
-      become_user: "{{ ansible_env.SUDO_USER | default(ansible_user_id | default('ammo')) }}"
+      become_user: "{{ ansible_env.SUDO_USER | default(ansible_user_id) }}"
       shell: fish -c 'fish_update_completions'
 
-    - name: 👉 12. Дополнительные настройки
+    - name: 👉 12. Обновление tldr
       become: false
-      become_user: "{{ ansible_env.SUDO_USER | default(ansible_user_id | default('ammo')) }}"
+      become_user: "{{ ansible_env.SUDO_USER | default(ansible_user_id) }}"
       shell: fish -c 'tldr --update'
+
+    - name: 👉 13. Отключение KDE Wallet
+      ini_file:
+        path: "{{ ansible_env.HOME }}/.config/kwalletrc"
+        create: yes
+        section: Wallet
+        option: Enabled
+        value: 'false'
+        mode: '0644'
+      become: false
+      become_user: "{{ ansible_env.SUDO_USER | default(ansible_user_id) }}"
 
     - name: Информационное сообщение
       debug:
