@@ -59,49 +59,49 @@
       - peazip
 
   pre_tasks:
-    - name: 👉 0. Принудительное обновление ключей CachyOS
+    - name: 👉 Принудительное обновление ключей CachyOS
       become: true
       pacman:
         name: cachyos-keyring
         state: latest
 
-    - name: 👉 0.1. Обновление базы данных пакетов
+    - name: 👉 Обновление базы данных пакетов
       become: true
       pacman:
         update_cache: yes
 
   tasks:
-    - name: 👉 1. Обновление всех пакетов системы
+    - name: 👉 Обновление всех пакетов системы
       become: true
       pacman:
         upgrade: yes
 
-    - name: 👉 2. Установка 'base-devel' для сборки AUR пакетов
+    - name: 👉 Установка 'base-devel' для сборки AUR пакетов
       become: true
       pacman:
         name: base-devel
         state: present
 
-    - name: 👉 3. Установка yay (AUR-хелпер)
+    - name: 👉 Установка yay (AUR-хелпер)
       kewlfft.aur.aur:
         name: yay
         state: present
       become: false
 
-    - name: 👉 4. Установка пакетов из официальных репозиториев
+    - name: 👉 Установка пакетов из официальных репозиториев
       become: true
       pacman:
         name: "{{ pacman_packages }}"
         state: present
 
-    - name: 👉 5. Установка пакетов из AUR
+    - name: 👉 Установка пакетов из AUR
       kewlfft.aur.aur:
         use: yay
         name: "{{ aur_packages }}"
         state: present
       become: false
 
-    - name: 👉 6. Настройка Docker
+    - name: 👉 Настройка Docker
       become: true
       block:
         - name: Добавление пользователя в группу docker
@@ -116,7 +116,7 @@
             enabled: yes
             state: started
 
-    - name: 👉 7. Установка Rust
+    - name: 👉 Установка Rust
       become: false
       become_user: "{{ ansible_env.SUDO_USER | default(ansible_user_id | default('ammo')) }}"
       shell: |
@@ -124,7 +124,7 @@
       args:
         creates: "{{ ansible_env.HOME }}/.cargo/bin/rustc"
 
-    - name: 👉 8. Установка uv
+    - name: 👉 Установка uv
       become: false
       become_user: "{{ ansible_env.SUDO_USER | default(ansible_user_id) }}"
       shell: |
@@ -132,7 +132,22 @@
       args:
         creates: "{{ ansible_env.HOME }}/.local/bin/uv"
 
-    - name: 👉 9. Добавить алиасы в fish
+    - name: 🔑 Установка JetBrains Toolbox
+      tags: vpn
+      kewlfft.aur.aur:
+        use: yay
+        name: jetbrains-toolbox
+        state: present
+      become: false
+
+    - name: 🔑 Установка Julia
+      tags: vpn
+      become: false
+      become_user: "{{ ansible_env.SUDO_USER | default(ansible_user_id | default('ammo')) }}"
+      shell: |
+        curl -fsSL https://install.julialang.org | sh -s -- --yes
+
+    - name: 👉 Добавить алиасы в fish
       blockinfile:
         path: "{{ ansible_env.HOME }}/.config/fish/config.fish"
         marker: '#### ALIASES'
@@ -154,7 +169,7 @@
           alias lzg 'lazygit'
           alias lzd 'lazydocker'
 
-    - name: 👉 10. Добавление интеграций в fish
+    - name: 👉 Добавление интеграций в fish
       blockinfile:
         path: "{{ ansible_env.HOME }}/.config/fish/config.fish"
         marker: '#### INTEGRATIONS'
@@ -165,17 +180,17 @@
           abbr -a --position anywhere -- --help '--help | bat -plhelp'
           abbr -a --position anywhere -- -h '-h | bat -plhelp'
 
-    - name: 👉 11. Обновление автодополнений для fish
+    - name: 👉 Обновление автодополнений для fish
       become: false
       become_user: "{{ ansible_env.SUDO_USER | default(ansible_user_id) }}"
       shell: fish -c 'fish_update_completions'
 
-    - name: 👉 12. Обновление tldr
+    - name: 👉 Обновление базы tldr
       become: false
       become_user: "{{ ansible_env.SUDO_USER | default(ansible_user_id) }}"
       shell: fish -c 'tldr --update'
 
-    - name: 👉 13. Отключение KDE Wallet
+    - name: 👉 Отключение KDE Wallet
       ini_file:
         path: "{{ ansible_env.HOME }}/.config/kwalletrc"
         create: yes
@@ -192,8 +207,8 @@
           ========================================================================
           ✅ Установка завершена!
 
-          ℹ️ ВАЖНО: Чтобы изменения для Docker, NVIDIA и VirtualBox вступили в силу,
-          рекомендуется перезагрузить компьютер.
+          ℹ️ ВАЖНО: Чтобы изменения для Docker, NVIDIA, Julia и VirtualBox
+          вступили в силу, необходимо перезагрузить компьютер.
 
           Для VirtualBox может понадобиться:
           sudo modprobe vboxdrv

@@ -9,10 +9,18 @@ if not set -q PLAYBOOK
 end
 
 # Настройки репозитория
-set GIT_REPO "https://github.com/GavrisAS/ansible.git"
+set GIT_REPO "https://github.com/GavrisAS/cachyos_setup.git"
 
 # Текущий пользователь
 set USER (whoami)
+
+# Аргументы для ansible-pull
+set PULL_ARGS --limit localhost
+
+# если задана переменная EXTRA_ARGS — дополняем аргументы
+if set -q EXTRA_ARGS
+    set PULL_ARGS $PULL_ARGS $EXTRA_ARGS
+end
 
 # Путь до sudoers-файла
 set SUDOERS_PATH "/etc/sudoers.d/nopasswd-pacman"
@@ -39,8 +47,8 @@ ansible-galaxy collection install kewlfft.aur
 echo "Запускаем ansible-pull из $GIT_REPO, плейбук: $PLAYBOOK ..."
 ansible-pull \
     -U $GIT_REPO \
-    --limit localhost \
     $PLAYBOOK \
+    $PULL_ARGS \
     --ask-become-pass
 
 echo "✅ Готово! Система настроена."
