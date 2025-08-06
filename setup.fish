@@ -34,17 +34,21 @@ else
 end
 
 # 2) Устанавливаем Ansible, Git и keyring CachyOS
+echo
 echo "Устанавливаем пакеты: ansible, git, cachyos-keyring..."
 sudo pacman -Syu --noconfirm ansible git cachyos-keyring
 
 # 3) Устанавливаем коллекции
+echo
 echo "Устанавливаем коллекции ansible-galaxy..."
 ansible-galaxy collection install kewlfft.aur
 
 # 4) Запускаем плейбук
+echo
 echo "Запускаем ansible-pull из $GIT_REPO"
 echo "плейбук: $PLAYBOOK"
 echo "с аргументами: $PULL_ARGS"
+echo
 
 ansible-pull -U $GIT_REPO \
   --limit localhost \
