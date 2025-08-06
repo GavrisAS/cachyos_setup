@@ -10,7 +10,7 @@
       - docker-compose
       - telegram-desktop
       - discord
-      - flameshot
+      #- flameshot
       - gramps
       - libreoffice-fresh
       - qbittorrent
