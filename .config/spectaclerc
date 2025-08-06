@@ -1,1 +1,22 @@
-
+[Annotations]
+annotationToolType=11
+ellipseStrokeColor=255,0,0
+numberFillColor=0,255,0
+rectangleStrokeColor=255,0,0
+textFont=Noto Sans,14,-1,0,700,0,0,0,0,0,0,0,0,0,0,1,Bold
+textFontColor=255,0,0
+ 
+[General]
+clipboardGroup=PostScreenshotCopyImage
+launchAction=DoNotTakeScreenshot
+rememberSelectionRect=Never
+useLightMaskColor=true
+ 
+[GuiConfig]
+quitAfterSaveCopyExport=true
+ 
+[ImageSave]
+translatedScreenshotsFolder=Screenshots
+ 
+[VideoSave]
+translatedScreencastsFolder=Screencasts
