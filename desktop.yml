@@ -5,7 +5,7 @@
   vars:
     # Пакеты из официальных репозиториев Arch/CachyOS
     pacman_packages:
-      - nvidia-dkms
+      #- nvidia-dkms
       - docker
       - docker-compose
       - telegram-desktop
