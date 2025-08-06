@@ -1,4 +1,4 @@
-# Ansible Playbooks for CachyOS
+# Automated configuration of CachyOS Linux using Ansible
 Настройка рабочей системы после чистой установки.
 
 Выполнить в терминале
