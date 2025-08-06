@@ -1,5 +1,5 @@
 # Ansible Playbooks for CachyOS
-Настройка рабочей системы после установки
+Настройка рабочей системы после чистой установки
 
    ```
    set -x PLAYBOOK desktop.yml
