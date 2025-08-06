@@ -201,6 +201,25 @@
       become: false
       become_user: "{{ ansible_env.SUDO_USER | default(ansible_user_id) }}"
 
+    - name: 👉 Переназначение горячих клавиш для Spectacle
+      blockinfile:
+        path: "{{ ansible_env.HOME }}/.config/kglobalshortcutsrc"
+        marker: "# {mark} SPECTACLE SHORTCUTS"
+        block: |
+          [services][org.kde.spectacle.desktop]
+          RectangularRegionScreenShot=Print
+          _launch=Meta+Shift+Print\tMeta+Shift+S
+
+    - name: 👉 Копирование .config
+      copy:
+        src: "{{ playbook_dir }}/.config/"
+        dest: "{{ ansible_env.HOME }}/.config/"
+        owner: "{{ ansible_user }}"
+        group: "{{ ansible_user }}"
+        mode: "0644"
+        directory_mode: "0755"
+        recurse: yes
+
     - name: Информационное сообщение
       debug:
         msg: |
