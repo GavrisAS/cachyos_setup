@@ -3,7 +3,7 @@
 
    ```
    set -x PLAYBOOK desktop.yml
-   set -x EXTRA_ARGS --skip-tags vpn
+   set -x EXTRA_ARGS --skip-tags=vpn
    curl -sL https://raw.githubusercontent.com/GavrisAS/cachyos_setup/main/setup.fish | fish
    ```
 
@@ -14,6 +14,6 @@
 | `EXTRA_ARGS`               | Выполнятся                                                 |
 |----------------------------|------------------------------------------------------------|
 | *(не задано)*              | все задачи                                                 |
-| `--skip-tags vpn`          | все задачи, кроме тех, что помечены тэгом `vpn`            |
-| `--tags vpn`               | только задачи, помеченные тэгом `vpn`                      |
+| `--skip-tags=vpn`          | все задачи, кроме тех, что помечены тэгом `vpn`            |
+| `--tags=vpn`               | только задачи, помеченные тэгом `vpn`                      |
 
