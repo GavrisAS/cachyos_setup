@@ -42,7 +42,10 @@ echo "Устанавливаем коллекции ansible-galaxy..."
 ansible-galaxy collection install kewlfft.aur
 
 # 4) Запускаем плейбук
-echo "Запускаем ansible-pull из $GIT_REPO, плейбук: $PLAYBOOK ..."
+echo "Запускаем ansible-pull из $GIT_REPO"
+echo "плейбук: $PLAYBOOK"
+echo "с аргументами: $PULL_ARGS"
+
 ansible-pull -U $GIT_REPO \
   --limit localhost \
   $PULL_ARGS \
