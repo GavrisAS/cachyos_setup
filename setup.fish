@@ -1,6 +1,4 @@
 #!/usr/bin/env fish
-# bootstrap.fish — подготовка системы + ansible-pull
-# Использование: ./bootstrap.fish <playbook.yml>
 
 # Проверяем задан ли плейбук
 if not set -q PLAYBOOK
