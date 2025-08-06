@@ -118,7 +118,7 @@
 
     - name: 👉 Установка Rust
       become: false
-      become_user: "{{ ansible_env.SUDO_USER | default(ansible_user_id | default('ammo')) }}"
+      become_user: "{{ ansible_env.SUDO_USER | default(ansible_user_id) }}"
       shell: |
         curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
       args:
@@ -143,7 +143,7 @@
     - name: 🔑 Установка Julia
       tags: vpn
       become: false
-      become_user: "{{ ansible_env.SUDO_USER | default(ansible_user_id | default('ammo')) }}"
+      become_user: "{{ ansible_env.SUDO_USER | default(ansible_user_id) }}"
       shell: |
         curl -fsSL https://install.julialang.org | sh -s -- --yes
 
