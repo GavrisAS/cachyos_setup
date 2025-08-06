@@ -46,8 +46,8 @@ ansible-galaxy collection install kewlfft.aur
 # 4) Запускаем плейбук
 echo
 echo "Запускаем ansible-pull из $GIT_REPO"
-echo "плейбук: $PLAYBOOK"
-echo "с аргументами: $PULL_ARGS"
+echo "Плейбук: $PLAYBOOK"
+echo "С аргументами: $PULL_ARGS"
 echo
 
 ansible-pull -U $GIT_REPO \
