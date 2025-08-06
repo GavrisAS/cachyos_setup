@@ -150,7 +150,7 @@
     - name: 👉 Добавить алиасы в fish
       blockinfile:
         path: "{{ ansible_env.HOME }}/.config/fish/config.fish"
-        marker: '#### ALIASES'
+        marker: '##### {mark} ALIASES #####'
         block: |
           alias ls 'eza -lhoUm --icons --hyperlink --time-style iso --colour-scale=age --no-permissions'
           alias lsg 'eza -lhoUm --icons --hyperlink --time-style iso --colour-scale=age --no-permissions --git --git-repos'
@@ -172,7 +172,7 @@
     - name: 👉 Добавление интеграций в fish
       blockinfile:
         path: "{{ ansible_env.HOME }}/.config/fish/config.fish"
-        marker: '#### INTEGRATIONS'
+        marker: '##### {mark} INTEGRATIONS #####'
         block: |
           fzf --fish | source
           zoxide init fish | source
@@ -204,7 +204,7 @@
     - name: 👉 Переназначение горячих клавиш для Spectacle
       blockinfile:
         path: "{{ ansible_env.HOME }}/.config/kglobalshortcutsrc"
-        marker: "# {mark} SPECTACLE SHORTCUTS"
+        marker: "##### {mark} SPECTACLE SHORTCUTS #####"
         block: |
           [services][org.kde.spectacle.desktop]
           RectangularRegionScreenShot=Print
