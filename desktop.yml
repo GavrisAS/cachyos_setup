@@ -216,7 +216,6 @@
         dest: "{{ ansible_env.HOME }}/.config/"
         mode: "0644"
         directory_mode: "0755"
-        recurse: yes
 
     - name: Информационное сообщение
       debug:
