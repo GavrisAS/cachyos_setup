@@ -5,12 +5,10 @@
   vars:
     # Пакеты из официальных репозиториев Arch/CachyOS
     pacman_packages:
-      #- nvidia-dkms
       - docker
       - docker-compose
       - telegram-desktop
       - discord
-      #- flameshot
       - gramps
       - libreoffice-fresh
       - qbittorrent
@@ -27,7 +25,7 @@
       - ttf-jetbrains-mono
       - github-cli
       - zed
-      #- ghostty
+      - ghostty
       - btop
       - eza
       - fd
@@ -124,6 +122,13 @@
         curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
       args:
         creates: "{{ ansible_env.HOME }}/.cargo/bin/rustc"
+
+    - name: 👉 Добавление автодополнений для uv
+      become: false
+      become_user: "{{ ansible_env.SUDO_USER | default(ansible_user_id) }}"
+      shell: |
+        echo 'uv generate-shell-completion fish | source' > ~/.config/fish/completions/uv.fish
+        echo 'uvx --generate-shell-completion fish | source' > ~/.config/fish/completions/uvx.fish
 
     - name: 🔑 Установка JetBrains Toolbox
       tags: vpn
