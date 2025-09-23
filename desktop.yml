@@ -21,6 +21,7 @@
       - virtualbox-host-dkms
       - vlc
       - ruff
+      - uv
       - neovim
       - yt-dlp
       - ttf-jetbrains-mono
@@ -123,14 +124,6 @@
         curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
       args:
         creates: "{{ ansible_env.HOME }}/.cargo/bin/rustc"
-
-    - name: 👉 Установка uv
-      become: false
-      become_user: "{{ ansible_env.SUDO_USER | default(ansible_user_id) }}"
-      shell: |
-        curl -LsSf https://astral.sh/uv/install.sh | sh
-      args:
-        creates: "{{ ansible_env.HOME }}/.local/bin/uv"
 
     - name: 🔑 Установка JetBrains Toolbox
       tags: vpn
