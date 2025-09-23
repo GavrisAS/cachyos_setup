@@ -12,7 +12,6 @@
       - gramps
       - libreoffice-fresh
       - qbittorrent
-      - texmaker
       - thunderbird
       - firefox
       - virtualbox
@@ -42,6 +41,16 @@
       - lazygit
       - graphviz
       - tree
+      - texlive-basic
+      - texlive-latex
+      - texlive-latexrecommended
+      - texlive-latexextra
+      - texlive-fontsrecommended
+      - texlive-fontsextra
+      - texlive-langcyrillic
+      - texlive-langenglish
+      - texlive-mathscience
+      - texmaker
 
     # Пакеты из AUR
     aur_packages:
