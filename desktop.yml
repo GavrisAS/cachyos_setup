@@ -226,6 +226,13 @@
         mode: "0644"
         directory_mode: "0755"
 
+    - name: 👉 Копирование .local
+      copy:
+        src: "{{ playbook_dir }}/.local/"
+        dest: "{{ ansible_env.HOME }}/.local/"
+        mode: "0644"
+        directory_mode: "0755"
+
     - name: Информационное сообщение
       debug:
         msg: |
