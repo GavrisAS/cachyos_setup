@@ -18,6 +18,7 @@
       - virtualbox-host-dkms
       - vlc
       - vlc-plugins-all
+      - vlc-gui-skins2
       - ruff
       - uv
       - neovim
