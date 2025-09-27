@@ -17,6 +17,7 @@
       - virtualbox
       - virtualbox-host-dkms
       - vlc
+      - vlc-plugin-ffmpeg
       - ruff
       - uv
       - neovim
