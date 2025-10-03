@@ -43,6 +43,7 @@
       - lazygit
       - graphviz
       - tree
+      - broot
       - okular
       - texlive-basic
       - texlive-latex
