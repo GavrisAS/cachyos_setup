@@ -23,14 +23,14 @@ end
 # Путь до sudoers-файла
 set SUDOERS_PATH "/etc/sudoers.d/nopasswd-pacman"
 
-# 1) Добавляем sudoers для pacman и yay, если ещё нет
+# 1) Добавляем sudoers для pacman и paru, если ещё нет
 if not test -f $SUDOERS_PATH
-    echo "Добавляем в sudoers права для pacman и yay..."
-    echo "$USER ALL=(ALL) NOPASSWD: /usr/bin/pacman, /usr/bin/yay" \
+    echo "Добавляем в sudoers права для pacman и paru..."
+    echo "$USER ALL=(ALL) NOPASSWD: /usr/bin/pacman, /usr/bin/paru" \
         | sudo tee $SUDOERS_PATH > /dev/null
     sudo chmod 440 $SUDOERS_PATH
 else
-    echo "✅ Судоеры для pacman уже настроены."
+    echo "✅ Судоеры для pacman и paru уже настроены."
 end
 
 # 2) Устанавливаем Ansible, Git и keyring CachyOS
