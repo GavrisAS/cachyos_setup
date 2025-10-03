@@ -93,12 +93,6 @@
         name: base-devel
         state: present
 
-    - name: 👉 Установка yay (AUR-хелпер)
-      kewlfft.aur.aur:
-        name: yay
-        state: present
-      become: false
-
     - name: 👉 Установка пакетов из официальных репозиториев
       become: true
       pacman:
@@ -107,7 +101,7 @@
 
     - name: 👉 Установка пакетов из AUR
       kewlfft.aur.aur:
-        use: yay
+        use: paru
         name: "{{ aur_packages }}"
         state: present
       become: false
@@ -153,7 +147,7 @@
     - name: 🔑 Установка JetBrains Toolbox
       tags: vpn
       kewlfft.aur.aur:
-        use: yay
+        use: paru
         name: jetbrains-toolbox
         state: present
       become: false
