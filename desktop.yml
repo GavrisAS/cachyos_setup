@@ -196,7 +196,11 @@
     - name: 👉 Обновление автодополнений для fish
       become: false
       become_user: "{{ ansible_env.SUDO_USER | default(ansible_user_id) }}"
-      shell: fish -c 'fish_update_completions'
+      shell: |
+        fish -c 'fish_update_completions'
+        mkdir -p ~/.config/fish/completions
+        procs --gen-completion-out fish > ~/.config/fish/completions/procs.fish
+        sed -i '/procs --gen-completion-out fish/d' ~/.config/fish/config.fish
 
     - name: 👉 Обновление базы tldr
       become: false
