@@ -55,6 +55,8 @@
       - texlive-langenglish
       - texlive-mathscience
       - texmaker
+      - handbrake
+      - kdenlive
 
     # Пакеты из AUR
     aur_packages:
