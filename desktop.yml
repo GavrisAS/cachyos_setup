@@ -128,8 +128,6 @@
       become: false
       become_user: "{{ ansible_env.SUDO_USER | default(ansible_user_id) }}"
       shell: |
-        git config --global user.email "GavrisAS@gmail.com"
-        git config --global user.name "Alexander Gavris"
         git config --global core.quotepath false
         
     - name: 👉 Установка Rust
