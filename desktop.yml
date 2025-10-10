@@ -59,6 +59,7 @@
       - kdenlive
       - kompare
       - kdiff3
+      - difftastic
 
     # Пакеты из AUR
     aur_packages:
