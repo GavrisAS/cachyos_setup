@@ -57,6 +57,7 @@
       - texmaker
       - handbrake
       - kdenlive
+      - kompare
 
     # Пакеты из AUR
     aur_packages:
