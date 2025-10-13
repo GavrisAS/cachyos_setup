@@ -16,6 +16,7 @@
       - firefox
       - virtualbox
       - virtualbox-host-dkms
+      - virtualbox-guest-iso
       - vlc
       - vlc-plugins-all
       - vlc-gui-skins2
