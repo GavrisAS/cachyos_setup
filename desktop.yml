@@ -61,6 +61,7 @@
       - kompare
       - kdiff3
       - difftastic
+      - nvtop
 
     # Пакеты из AUR
     aur_packages:
