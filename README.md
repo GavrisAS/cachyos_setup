@@ -1,15 +1,15 @@
 # Automated configuration of CachyOS Linux using Ansible
-Настройка рабочей системы после чистой установки.
+Настройка рабочей системы после чистой установки CachyOS.
 
-Выполнить в терминале
+Выполнить в терминале:
 
-   ```
+   ```bash
    set -x PLAYBOOK desktop.yml
    set -x EXTRA_ARGS --skip-tags=vpn
    curl -sL https://raw.githubusercontent.com/GavrisAS/cachyos_setup/main/setup.fish | fish
    ```
 
-В плейбуке установлен тэг `vpn` для пакетов к которым нет доступа без VPN.
+В плейбуке установлен тэг `vpn` для пакетов, к которым нет доступа без VPN.
 
 Есть 3 варианта запуска:
 
