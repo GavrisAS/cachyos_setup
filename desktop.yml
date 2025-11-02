@@ -22,7 +22,7 @@
       - vlc-gui-skins2
       - ruff
       - uv
-      - neovim
+      - helix
       - yt-dlp
       - ttf-jetbrains-mono
       - github-cli
