@@ -186,6 +186,7 @@
           alias psm 'procs --watch --sortd mem'
           alias lzg 'lazygit'
           alias lzd 'lazydocker'
+          alias system_update 'paru;rustup self update;rustup update;juliaup self update;juliaup update'
 
     - name: 👉 Добавление интеграций в fish
       blockinfile:
