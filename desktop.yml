@@ -191,6 +191,7 @@
           alias clearml_run 'docker compose -f /opt/clearml/docker-compose.yml up -d;echo The server is now running on http://localhost:8080'
           alias clearml_stop 'docker compose -f /opt/clearml/docker-compose.yml down'
           alias clearml_update 'sudo curl https://raw.githubusercontent.com/clearml/clearml-server/master/docker/docker-compose.yml -o /opt/clearml/docker-compose.yml;docker compose -f /opt/clearml/docker-compose.yml pull'
+          alias hx 'helix'
 
     - name: 👉 Добавление интеграций в fish
       blockinfile:
