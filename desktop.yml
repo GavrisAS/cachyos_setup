@@ -22,6 +22,7 @@
       - vlc-gui-skins2
       - ruff
       - uv
+      - ty
       - helix
       - yt-dlp
       - ttf-jetbrains-mono
