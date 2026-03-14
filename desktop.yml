@@ -63,6 +63,7 @@
       - kdiff3
       - difftastic
       - nvtop
+      - openai-codex
 
     # Пакеты из AUR
     aur_packages:
