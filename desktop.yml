@@ -68,7 +68,7 @@
     # Пакеты из AUR
     aur_packages:
       - lazydocker
-      - lmstudio
+      - lmstudio-bin
       - obsidian
       - yandex-browser
       - warp-terminal
