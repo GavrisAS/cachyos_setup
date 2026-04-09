@@ -64,6 +64,7 @@
       - difftastic
       - nvtop
       - openai-codex
+      - ollama-cuda
 
     # Пакеты из AUR
     aur_packages:
