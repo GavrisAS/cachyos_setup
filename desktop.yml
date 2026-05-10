@@ -86,6 +86,9 @@
       - wtfutil
       - opencode-bin
       - tradingview
+      - openai-codex-desktop
+      - claude-code
+      - claude-desktop-bin
 
   pre_tasks:
     - name: 👉 Принудительное обновление ключей CachyOS
