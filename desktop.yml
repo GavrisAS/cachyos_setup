@@ -87,6 +87,7 @@
       - opencode-bin
       - tradingview
       - openai-codex-desktop
+      - pi-coding-agent
 
   pre_tasks:
     - name: 👉 Принудительное обновление ключей CachyOS
