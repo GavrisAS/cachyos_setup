@@ -85,6 +85,7 @@
       - google-chrome
       - wtfutil
       - opencode-bin
+      - opencode-desktop-bin
       - tradingview
       - openai-codex-desktop
       - pi-coding-agent
