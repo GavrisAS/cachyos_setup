@@ -73,9 +73,8 @@
       - lmstudio-bin
       - obsidian
       - yandex-browser
-      - warp-terminal
-      #- throne-bin
-      - cursor-bin
+      - warp-terminal-bin
+      - throne-bin
       - slack-desktop
       - visual-studio-code-bin
       - zoom
@@ -90,6 +89,9 @@
       - openai-codex-desktop
       - pi-coding-agent
       - handy-bin
+      - brave-bin
+      - claude-code
+      - ttf-ms-fonts
 
   pre_tasks:
     - name: 👉 Принудительное обновление ключей CachyOS
