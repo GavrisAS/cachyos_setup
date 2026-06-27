@@ -18,9 +18,7 @@
       - virtualbox
       - virtualbox-host-dkms
       - virtualbox-guest-iso
-      - vlc
-      - vlc-plugins-all
-      - vlc-gui-skins2
+      - haruna
       - ruff
       - uv
       - ty
